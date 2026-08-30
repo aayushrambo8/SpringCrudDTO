@@ -6,6 +6,7 @@ import live.aayush.entity.Student;
 import live.aayush.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class StudentService
         student.setRollNo(studentRequestDTO.getRollNo());
         student.setDeleted(false);
 
+
         return student;
     }
 
@@ -42,18 +44,19 @@ public class StudentService
         studentResponseDTO.setSubject(student.getSubject());
         studentResponseDTO.setRollNo(student.getRollNo());
         studentResponseDTO.setMessage(message);
+        studentResponseDTO.setCreatedAt(student.getCreatedAt());
+        studentResponseDTO.setUpdatedAt(student.getUpdatedAt());
 
         return studentResponseDTO;
     }
 
-    private StudentResponseDTO mapToDTO(Student student)
-    {
-        return mapToDTO(student, "Student saved successfully");
-    }
 
     public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO)
     {
         Student student = mapToEntity(studentRequestDTO);
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
+
         return mapToDTO(studentRepository.save(student), "Student saved successfully");
     }
 
@@ -81,8 +84,10 @@ public class StudentService
         studentUpdate.setEmail(studentRequestDTO.getEmail());
         studentUpdate.setSubject(studentRequestDTO.getSubject());
         studentUpdate.setRollNo(studentRequestDTO.getRollNo());
+        studentUpdate.setUpdatedAt(LocalDateTime.now());
 
         Student savedStudent = studentRepository.save(studentUpdate);
+
         return mapToDTO(savedStudent, "Student updated successfully");
     }
 
@@ -103,8 +108,11 @@ public class StudentService
     {
         Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
         if(existingStudent.isEmpty()) return false;
-        existingStudent.get().setDeleted(true);
-        studentRepository.save(existingStudent.get());
+        
+        Student student = existingStudent.get();
+        student.setDeleted(true);
+        student.setUpdatedAt(LocalDateTime.now());
+        studentRepository.save(student);
         return true;
     }
 }

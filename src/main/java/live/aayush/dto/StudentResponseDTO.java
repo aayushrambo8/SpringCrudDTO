@@ -1,5 +1,7 @@
 package live.aayush.dto;
 
+import java.time.LocalDateTime;
+
 public class StudentResponseDTO
 {
     private Long id;
@@ -9,6 +11,8 @@ public class StudentResponseDTO
     private String email;
     private String subject;
     private String message;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Long getId()
     {
@@ -78,5 +82,25 @@ public class StudentResponseDTO
     public void setMessage(String message)
     {
         this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt()
+    {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt)
+    {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt()
+    {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt)
+    {
+        this.updatedAt = updatedAt;
     }
 }
