@@ -16,6 +16,9 @@ The application exposes a set of RESTful APIs to manage `Student` records via th
 
 Additionally, the project supports both **hard deletion** and **soft deletion** of records.
 
+### API Testing (Bruno)
+The project includes a ready-to-use API testing collection for [Bruno](https://www.usebruno.com/). The endpoints configuration files are conveniently located inside the `src/Bruno Endpoints` directory. You can import this folder directly into your Bruno client to quickly test all the CRUD APIs without needing to configure the requests manually.
+
 ### API Endpoints
 
 | HTTP Method | Endpoint | Description |
