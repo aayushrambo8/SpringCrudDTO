@@ -12,7 +12,7 @@ A Spring Boot application demonstrating CRUD (Create, Read, Update, Delete) oper
 
 ## Functionalities
 
-The application exposes a set of RESTful APIs to manage `Student` records via the `StudentController`. It extensively implements the DTO pattern (using `StudentRequestDTO` and `StudentResponseDTO`) to completely decouple the internal database entities from the API layer for creation, retrieval, and updating processes.
+The application exposes a set of RESTful APIs to manage `Student` records via the `StudentController`. It extensively implements the DTO pattern (using `StudentRequestDTO` and `StudentResponseDTO`) to completely decouple the internal database entities from the API layer for creation, retrieval, and updating processes. Record timestamps (`createdAt` and `updatedAt`) are automatically managed by the application service during state changes.
 
 Additionally, the project supports both **hard deletion** and **soft deletion** of records.
 
