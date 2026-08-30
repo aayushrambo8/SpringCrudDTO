@@ -12,6 +12,13 @@ import java.util.Optional;
 @Service
 public class StudentService
 {
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository)
+    {
+        this.studentRepository = studentRepository;
+    }
+
     private Student mapToEntity(StudentRequestDTO studentRequestDTO)
     {
         Student student = new Student();
@@ -25,7 +32,7 @@ public class StudentService
         return student;
     }
 
-    private StudentResponseDTO mapToDTO(Student student)
+    private StudentResponseDTO mapToDTO(Student student, String message)
     {
         StudentResponseDTO studentResponseDTO = new StudentResponseDTO();
         studentResponseDTO.setId(student.getId());
@@ -34,50 +41,49 @@ public class StudentService
         studentResponseDTO.setEmail(student.getEmail());
         studentResponseDTO.setSubject(student.getSubject());
         studentResponseDTO.setRollNo(student.getRollNo());
-        studentResponseDTO.setMessage("Student saved successfully");
+        studentResponseDTO.setMessage(message);
 
         return studentResponseDTO;
     }
 
-    private final StudentRepository studentRepository;
-
-    public StudentService(StudentRepository studentRepository)
+    private StudentResponseDTO mapToDTO(Student student)
     {
-        this.studentRepository = studentRepository;
+        return mapToDTO(student, "Student saved successfully");
     }
 
     public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO)
     {
         Student student = mapToEntity(studentRequestDTO);
-        return mapToDTO(studentRepository.save(student));
+        return mapToDTO(studentRepository.save(student), "Student saved successfully");
     }
 
-    public Student getStudent(Long id)
+    public StudentResponseDTO getStudent(Long id)
     {
         Optional<Student> studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);
-        return studentResponse.orElse(null);
+        return studentResponse.map(student -> mapToDTO(student, "Student fetched successfully")).orElse(null);
     }
 
-    public List<Student> getAllStudent()
+    public List<StudentResponseDTO> getAllStudent()
     {
-        return studentRepository.findByDeletedIsFalse();
+        List<Student> studentList = studentRepository.findByDeletedIsFalse();
+        return studentList.stream().map(student -> mapToDTO(student, "Student fetched successfully")).toList();
     }
 
-    public Student updateStudent(Long id, Student studentRequest)
+    public StudentResponseDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO)
     {
         Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
         if(existingStudent.isEmpty()) return null;
 
         Student studentUpdate = existingStudent.get();
 
-        studentUpdate.setName(studentRequest.getName());
-        studentUpdate.setAge(studentRequest.getAge());
-        studentUpdate.setEmail(studentRequest.getEmail());
-        studentUpdate.setSubject(studentRequest.getSubject());
-        studentUpdate.setRollNo(studentRequest.getRollNo());
-        studentUpdate.setDeleted(false);
+        studentUpdate.setName(studentRequestDTO.getName());
+        studentUpdate.setAge(studentRequestDTO.getAge());
+        studentUpdate.setEmail(studentRequestDTO.getEmail());
+        studentUpdate.setSubject(studentRequestDTO.getSubject());
+        studentUpdate.setRollNo(studentRequestDTO.getRollNo());
 
-        return studentRepository.save(studentUpdate);
+        Student savedStudent = studentRepository.save(studentUpdate);
+        return mapToDTO(savedStudent, "Student updated successfully");
     }
 
     public boolean deleteStudent(Long id)

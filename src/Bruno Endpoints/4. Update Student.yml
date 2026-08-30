@@ -1,0 +1,33 @@
+info:
+  name: Update Student
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://localhost:8080/api/student/update?id=
+  params:
+    - name: id
+      value: ""
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+        "age": 22,
+        "deleted": false,
+        "email": "babu@aayush.com",
+        "id": 5,
+        "name": "Aayush Kumar",
+        "rollNo": 995,
+        "subject": "Altu faltu"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
+
+docs: Update an existing student by ID. Returns 404 if not found.

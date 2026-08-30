@@ -2,7 +2,6 @@ package live.aayush.controller;
 
 import live.aayush.dto.StudentRequestDTO;
 import live.aayush.dto.StudentResponseDTO;
-import live.aayush.entity.Student;
 import live.aayush.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,25 +29,26 @@ public class StudentController
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Student> getStudent(@RequestParam Long id)
+    public ResponseEntity<StudentResponseDTO> getStudent(@RequestParam Long id)
     {
-        Student studentResponse = studentService.getStudent(id);
+        StudentResponseDTO studentResponse = studentService.getStudent(id);
         if(studentResponse == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         else return ResponseEntity.ok(studentResponse);
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Student>> getAllStudent()
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudent()
     {
-        List<Student> studentList = studentService.getAllStudent();
+        List<StudentResponseDTO> studentList = studentService.getAllStudent();
         if(studentList == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         else return ResponseEntity.ok(studentList);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Student> updateStudent(@RequestParam Long id, @RequestBody Student studentRequest)
+    public ResponseEntity<StudentResponseDTO> updateStudent(@RequestParam Long id,
+                                                            @RequestBody StudentRequestDTO studentRequestDTO)
     {
-        Student studentResponse = studentService.updateStudent(id, studentRequest);
+        StudentResponseDTO studentResponse = studentService.updateStudent(id, studentRequestDTO);
         if(studentResponse == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         else return ResponseEntity.ok(studentResponse);
     }

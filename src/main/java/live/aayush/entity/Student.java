@@ -20,9 +20,15 @@ public class Student
     private String subject;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private boolean deleted = false;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
 
     public void setDeleted(boolean deleted)
     {
+        this.deleted = deleted;
     }
 
     public Long getId()
