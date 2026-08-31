@@ -4,14 +4,20 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### Environment & Secret Files ###
+.env
+application-local.properties
+application-secret.properties
+application-*.properties
+*.local.properties
+*.secret.properties
+
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
 ### Eclipse ###
 .apt_generated
@@ -37,3 +43,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Log files ###
+*.log
