@@ -1,13 +1,30 @@
 package live.aayush.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 public class CreateStudentRequestDTO
 {
+    @NotNull(message = "Name field Cannot be blank")
     private String name;
-    private int age;
+
+    @NotNull(message = "Age field Cannot be blank")
+    @Min(value = 18, message = "Age must be greater than 18")
+    @Max(value = 75, message = "Age must be less than 75")
+    private Integer age;
+
+    @NotNull(message = "Rollno. field Cannot be blank")
     private int rollNo;
+
+    @NotNull(message = "Email field Cannot be blank")
+    @Email
     private String email;
+
+    @NotNull(message = "Subject field Cannot be blank")
     private String subject;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

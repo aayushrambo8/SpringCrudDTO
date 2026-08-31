@@ -1,8 +1,8 @@
 package live.aayush.service;
 
+import jakarta.validation.Valid;
 import live.aayush.dto.CreateStudentRequestDTO;
 import live.aayush.dto.CreateStudentResponseDTO;
-import live.aayush.dto.UpdateStudentRequestDTO;
 import live.aayush.dto.UpdateStudentResponseDTO;
 import live.aayush.entity.Student;
 import live.aayush.repository.StudentRepository;
@@ -88,7 +88,7 @@ public class StudentService
         return studentList.stream().map(student -> mapTCreateDTO(student, "Student fetched successfully")).toList();
     }
 
-    public UpdateStudentResponseDTO updateStudent(Long id, UpdateStudentRequestDTO createStudentRequestDTO)
+    public UpdateStudentResponseDTO updateStudent(Long id, @Valid UpdateStudentResponseDTO createStudentRequestDTO)
     {
         Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
         if(existingStudent.isEmpty()) return null;

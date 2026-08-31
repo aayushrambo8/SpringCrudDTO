@@ -1,8 +1,8 @@
 package live.aayush.controller;
 
+import jakarta.validation.Valid;
 import live.aayush.dto.CreateStudentRequestDTO;
 import live.aayush.dto.CreateStudentResponseDTO;
-import live.aayush.dto.UpdateStudentRequestDTO;
 import live.aayush.dto.UpdateStudentResponseDTO;
 import live.aayush.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class StudentController
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CreateStudentResponseDTO> createStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO)
+    public ResponseEntity<CreateStudentResponseDTO> createStudent(@Valid @RequestBody CreateStudentRequestDTO createStudentRequestDTO)
     {
         CreateStudentResponseDTO createdStudent = studentService.createStudent(createStudentRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
@@ -48,7 +48,7 @@ public class StudentController
 
     @PutMapping("/update")
     public ResponseEntity<UpdateStudentResponseDTO> updateStudent(@RequestParam Long id,
-                                                                  @RequestBody UpdateStudentRequestDTO updateStudentRequestDTO)
+                                                                  @Valid @RequestBody UpdateStudentResponseDTO updateStudentRequestDTO)
     {
         UpdateStudentResponseDTO studentResponse = studentService.updateStudent(id, updateStudentRequestDTO);
         if(studentResponse == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
