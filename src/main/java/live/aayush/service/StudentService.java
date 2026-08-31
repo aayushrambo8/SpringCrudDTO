@@ -2,6 +2,8 @@ package live.aayush.service;
 
 import live.aayush.dto.CreateStudentRequestDTO;
 import live.aayush.dto.CreateStudentResponseDTO;
+import live.aayush.dto.UpdateStudentRequestDTO;
+import live.aayush.dto.UpdateStudentResponseDTO;
 import live.aayush.entity.Student;
 import live.aayush.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class StudentService
         this.studentRepository = studentRepository;
     }
 
-    private Student mapToEntity(CreateStudentRequestDTO createStudentRequestDTO)
+    private Student mapToCreateEntity(CreateStudentRequestDTO createStudentRequestDTO)
     {
         Student student = new Student();
         student.setName(createStudentRequestDTO.getName());
@@ -34,7 +36,7 @@ public class StudentService
         return student;
     }
 
-    private CreateStudentResponseDTO mapToDTO(Student student, String message)
+    private CreateStudentResponseDTO mapTCreateoDTO(Student student, String message)
     {
         CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
         createStudentResponseDTO.setId(student.getId());
@@ -50,29 +52,43 @@ public class StudentService
         return createStudentResponseDTO;
     }
 
+    private UpdateStudentResponseDTO mapToUpdateDTO(Student student)
+    {
+        UpdateStudentResponseDTO updateStudentResponseDTO = new UpdateStudentResponseDTO();
+        updateStudentResponseDTO.setId(student.getId());
+        updateStudentResponseDTO.setName(student.getName());
+        updateStudentResponseDTO.setAge(student.getAge());
+        updateStudentResponseDTO.setEmail(student.getEmail());
+        updateStudentResponseDTO.setSubject(student.getSubject());
+        updateStudentResponseDTO.setRollNo(student.getRollNo());
+        updateStudentResponseDTO.setMessage("Student updated successfully");
+        updateStudentResponseDTO.setUpdatedAt(student.getUpdatedAt());
+
+        return updateStudentResponseDTO;
+    }
 
     public CreateStudentResponseDTO createStudent(CreateStudentRequestDTO createStudentRequestDTO)
     {
-        Student student = mapToEntity(createStudentRequestDTO);
+        Student student = mapToCreateEntity(createStudentRequestDTO);
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
-        return mapToDTO(studentRepository.save(student), "Student saved successfully");
+        return mapTCreateoDTO(studentRepository.save(student), "Student saved successfully");
     }
 
     public CreateStudentResponseDTO getStudent(Long id)
     {
         Optional<Student> studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);
-        return studentResponse.map(student -> mapToDTO(student, "Student fetched successfully")).orElse(null);
+        return studentResponse.map(student -> mapTCreateoDTO(student, "Student fetched successfully")).orElse(null);
     }
 
     public List<CreateStudentResponseDTO> getAllStudent()
     {
         List<Student> studentList = studentRepository.findByDeletedIsFalse();
-        return studentList.stream().map(student -> mapToDTO(student, "Student fetched successfully")).toList();
+        return studentList.stream().map(student -> mapTCreateoDTO(student, "Student fetched successfully")).toList();
     }
 
-    public CreateStudentResponseDTO updateStudent(Long id, CreateStudentRequestDTO createStudentRequestDTO)
+    public UpdateStudentResponseDTO updateStudent(Long id, UpdateStudentRequestDTO createStudentRequestDTO)
     {
         Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
         if(existingStudent.isEmpty()) return null;
@@ -81,14 +97,13 @@ public class StudentService
 
         studentUpdate.setName(createStudentRequestDTO.getName());
         studentUpdate.setAge(createStudentRequestDTO.getAge());
-        studentUpdate.setEmail(createStudentRequestDTO.getEmail());
         studentUpdate.setSubject(createStudentRequestDTO.getSubject());
         studentUpdate.setRollNo(createStudentRequestDTO.getRollNo());
         studentUpdate.setUpdatedAt(LocalDateTime.now());
 
         Student savedStudent = studentRepository.save(studentUpdate);
 
-        return mapToDTO(savedStudent, "Student updated successfully");
+        return mapToUpdateDTO(savedStudent);
     }
 
     public boolean deleteStudent(Long id)
