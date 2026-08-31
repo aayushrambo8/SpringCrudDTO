@@ -36,7 +36,7 @@ public class StudentService
         return student;
     }
 
-    private CreateStudentResponseDTO mapTCreateoDTO(Student student, String message)
+    private CreateStudentResponseDTO mapTCreateDTO(Student student, String message)
     {
         CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
         createStudentResponseDTO.setId(student.getId());
@@ -73,19 +73,19 @@ public class StudentService
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
-        return mapTCreateoDTO(studentRepository.save(student), "Student saved successfully");
+        return mapTCreateDTO(studentRepository.save(student), "Student saved successfully");
     }
 
     public CreateStudentResponseDTO getStudent(Long id)
     {
         Optional<Student> studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);
-        return studentResponse.map(student -> mapTCreateoDTO(student, "Student fetched successfully")).orElse(null);
+        return studentResponse.map(student -> mapTCreateDTO(student, "Student fetched successfully")).orElse(null);
     }
 
     public List<CreateStudentResponseDTO> getAllStudent()
     {
         List<Student> studentList = studentRepository.findByDeletedIsFalse();
-        return studentList.stream().map(student -> mapTCreateoDTO(student, "Student fetched successfully")).toList();
+        return studentList.stream().map(student -> mapTCreateDTO(student, "Student fetched successfully")).toList();
     }
 
     public UpdateStudentResponseDTO updateStudent(Long id, UpdateStudentRequestDTO createStudentRequestDTO)
