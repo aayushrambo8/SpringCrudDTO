@@ -1,7 +1,7 @@
 package live.aayush.service;
 
-import live.aayush.dto.StudentRequestDTO;
-import live.aayush.dto.StudentResponseDTO;
+import live.aayush.dto.CreateStudentRequestDTO;
+import live.aayush.dto.CreateStudentResponseDTO;
 import live.aayush.entity.Student;
 import live.aayush.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -20,70 +20,70 @@ public class StudentService
         this.studentRepository = studentRepository;
     }
 
-    private Student mapToEntity(StudentRequestDTO studentRequestDTO)
+    private Student mapToEntity(CreateStudentRequestDTO createStudentRequestDTO)
     {
         Student student = new Student();
-        student.setName(studentRequestDTO.getName());
-        student.setEmail(studentRequestDTO.getEmail());
-        student.setAge(studentRequestDTO.getAge());
-        student.setSubject(studentRequestDTO.getSubject());
-        student.setRollNo(studentRequestDTO.getRollNo());
+        student.setName(createStudentRequestDTO.getName());
+        student.setEmail(createStudentRequestDTO.getEmail());
+        student.setAge(createStudentRequestDTO.getAge());
+        student.setSubject(createStudentRequestDTO.getSubject());
+        student.setRollNo(createStudentRequestDTO.getRollNo());
         student.setDeleted(false);
 
 
         return student;
     }
 
-    private StudentResponseDTO mapToDTO(Student student, String message)
+    private CreateStudentResponseDTO mapToDTO(Student student, String message)
     {
-        StudentResponseDTO studentResponseDTO = new StudentResponseDTO();
-        studentResponseDTO.setId(student.getId());
-        studentResponseDTO.setName(student.getName());
-        studentResponseDTO.setAge(student.getAge());
-        studentResponseDTO.setEmail(student.getEmail());
-        studentResponseDTO.setSubject(student.getSubject());
-        studentResponseDTO.setRollNo(student.getRollNo());
-        studentResponseDTO.setMessage(message);
-        studentResponseDTO.setCreatedAt(student.getCreatedAt());
-        studentResponseDTO.setUpdatedAt(student.getUpdatedAt());
+        CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+        createStudentResponseDTO.setId(student.getId());
+        createStudentResponseDTO.setName(student.getName());
+        createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setEmail(student.getEmail());
+        createStudentResponseDTO.setSubject(student.getSubject());
+        createStudentResponseDTO.setRollNo(student.getRollNo());
+        createStudentResponseDTO.setMessage(message);
+        createStudentResponseDTO.setCreatedAt(student.getCreatedAt());
+        createStudentResponseDTO.setUpdatedAt(student.getUpdatedAt());
 
-        return studentResponseDTO;
+        return createStudentResponseDTO;
     }
 
 
-    public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO)
+    public CreateStudentResponseDTO createStudent(CreateStudentRequestDTO createStudentRequestDTO)
     {
-        Student student = mapToEntity(studentRequestDTO);
+        Student student = mapToEntity(createStudentRequestDTO);
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
         return mapToDTO(studentRepository.save(student), "Student saved successfully");
     }
 
-    public StudentResponseDTO getStudent(Long id)
+    public CreateStudentResponseDTO getStudent(Long id)
     {
         Optional<Student> studentResponse = studentRepository.findByIdAndDeletedIsFalse(id);
         return studentResponse.map(student -> mapToDTO(student, "Student fetched successfully")).orElse(null);
     }
 
-    public List<StudentResponseDTO> getAllStudent()
+    public List<CreateStudentResponseDTO> getAllStudent()
     {
         List<Student> studentList = studentRepository.findByDeletedIsFalse();
         return studentList.stream().map(student -> mapToDTO(student, "Student fetched successfully")).toList();
     }
 
-    public StudentResponseDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO)
+    public CreateStudentResponseDTO updateStudent(Long id, CreateStudentRequestDTO createStudentRequestDTO)
     {
         Optional<Student> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
         if(existingStudent.isEmpty()) return null;
 
         Student studentUpdate = existingStudent.get();
 
-        studentUpdate.setName(studentRequestDTO.getName());
-        studentUpdate.setAge(studentRequestDTO.getAge());
-        studentUpdate.setEmail(studentRequestDTO.getEmail());
-        studentUpdate.setSubject(studentRequestDTO.getSubject());
-        studentUpdate.setRollNo(studentRequestDTO.getRollNo());
+        studentUpdate.setName(createStudentRequestDTO.getName());
+        studentUpdate.setAge(createStudentRequestDTO.getAge());
+        studentUpdate.setEmail(createStudentRequestDTO.getEmail());
+        studentUpdate.setSubject(createStudentRequestDTO.getSubject());
+        studentUpdate.setRollNo(createStudentRequestDTO.getRollNo());
         studentUpdate.setUpdatedAt(LocalDateTime.now());
 
         Student savedStudent = studentRepository.save(studentUpdate);

@@ -1,17 +1,11 @@
 package live.aayush.dto;
 
-import java.time.LocalDateTime;
-
-public class StudentRequestDTO
+public class UpdateStudentRequestDTO
 {
     private String name;
     private int age;
     private int rollNo;
-    private String email;
     private String subject;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
 
     public String getName()
     {
@@ -43,16 +37,6 @@ public class StudentRequestDTO
         this.rollNo = rollNo;
     }
 
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
     public String getSubject()
     {
         return subject;
@@ -61,25 +45,5 @@ public class StudentRequestDTO
     public void setSubject(String subject)
     {
         this.subject = subject;
-    }
-
-    public LocalDateTime getCreatedAt()
-    {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt)
-    {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt()
-    {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt)
-    {
-        this.updatedAt = updatedAt;
     }
 }
