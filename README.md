@@ -31,6 +31,24 @@ The project includes a ready-to-use API testing collection for [Bruno](https://w
 | `DELETE` | `/api/student/deleteAll` | Permanently deletes all student records from the database. |
 | `PATCH` | `/api/student/soft-delete?id={id}` | Marks a student record as deleted by setting a `deleted` flag to true (Soft Delete), hiding it from standard fetch queries. |
 
+## Database Specification
+
+- **Database**: MySQL (compatible with version 8.0+)
+- **Schema**: A single `students` table.
+- **Table `students` columns**:
+  - `id` (BIGINT) – Primary Key, auto‑generated.
+  - `first_name` (VARCHAR) – Student's first name.
+  - `last_name` (VARCHAR) – Student's last name.
+  - `email` (VARCHAR) – Unique email address.
+  - `address` (VARCHAR) – Residential address.
+  - `phone_no` (VARCHAR) – Contact phone number.
+  - `created_at` (TIMESTAMP) – Record creation timestamp.
+  - `updated_at` (TIMESTAMP) – Record last update timestamp.
+  - `deleted` (BOOLEAN) – Soft‑delete flag, defaults to `false`.
+- **Indexes**: Primary key on `id`; unique constraint on `email`.
+- **Soft Delete**: Records are not physically removed; setting `deleted` to `true` hides them from standard fetch queries.
+- **Configuration**: Set the MySQL connection URL, username, and password in `src/main/resources/application.properties` (or `application.yml`).
+
 ## How to Run
 
 1. Ensure you have Java 21 and Maven installed.
