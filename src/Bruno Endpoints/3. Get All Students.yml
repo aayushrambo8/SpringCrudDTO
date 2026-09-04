@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8080/api/student/getAll
+  url: http://localhost:8080/api/student
 
 settings:
   encodeUrl: true

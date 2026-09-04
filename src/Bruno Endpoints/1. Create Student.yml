@@ -5,16 +5,16 @@ info:
 
 http:
   method: POST
-  url: http://localhost:8080/api/student/create
+  url: http://localhost:8080/api/student
   body:
     type: json
     data: |-
       {
-        "age": 24,
-        "email": "Sahil@aayush.com",
-        "name": "Sahil Gurg",
-        "rollNo": 33,
-        "subject": "Power Systems"
+        "age": 22,
+        "email": "Babu@aayush.com",
+        "name": "Aayush Babu",
+        "rollNo": 226,
+        "subject": "Cyber Security"
       }
 
 settings:

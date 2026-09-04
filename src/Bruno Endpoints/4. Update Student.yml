@@ -5,17 +5,12 @@ info:
 
 http:
   method: PUT
-  url: http://localhost:8080/api/student/update?id=
-  params:
-    - name: id
-      value: ""
-      type: query
+  url: http://localhost:8080/api/student/1
   body:
     type: json
     data: |-
       {
         "age": 22,
-        "deleted": false,
         "email": "babu@aayush.com",
         "id": 5,
         "name": "Aayush Kumar",

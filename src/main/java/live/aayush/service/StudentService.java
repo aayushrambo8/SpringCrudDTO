@@ -100,6 +100,7 @@ public class StudentService
         studentUpdate.setSubject(createStudentRequestDTO.getSubject());
         studentUpdate.setRollNo(createStudentRequestDTO.getRollNo());
         studentUpdate.setUpdatedAt(LocalDateTime.now());
+        studentUpdate.setDeleted(false);
 
         Student savedStudent = studentRepository.save(studentUpdate);
 
