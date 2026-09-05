@@ -5,11 +5,7 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8080/api/student/get?id=5
-  params:
-    - name: id
-      value: "5"
-      type: query
+  url: http://localhost:8080/api/student/2
 
 settings:
   encodeUrl: true

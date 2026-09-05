@@ -10,11 +10,11 @@ http:
     type: json
     data: |-
       {
-        "age": 22,
-        "email": "Babu@aayush.com",
-        "name": "Aayush Babu",
-        "rollNo": 226,
-        "subject": "Cyber Security"
+        "age": 20,
+        "email": "Yash@aayush.com",
+        "name": "Yash Mishra",
+        "rollNo": 99,
+        "subject": "UX"
       }
 
 settings:
