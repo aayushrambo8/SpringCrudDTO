@@ -2,6 +2,46 @@
 
 A Spring Boot application demonstrating CRUD (Create, Read, Update, Delete) operations using Data Transfer Objects (DTOs) and Spring Data JPA with a MySQL database.
 
+---
+
+## 📈 Stages of Progression
+
+An overview of the evolutionary roadmap and infrastructure progression of the project:
+
+```
+┌─────────────────────────┐      ┌─────────────────────────┐      ┌─────────────────────────┐
+│     Stage 1: v1.0.0     │      │     Stage 2: v1.1.0     │      │     Stage 3: v1.2.0     │
+│   🏠 Local MySQL DB     │ ───► │  ☁️ Aiven Cloud MySQL   │ ───► │  ⚡ Oracle Cloud (OCI)  │
+│  (Initial Development)  │      │   (Managed Cloud DB)    │      │  (Enterprise Deployment)│
+└─────────────────────────┘      └─────────────────────────┘      └─────────────────────────┘
+```
+
+### 📍 Progression Details
+
+* **Stage 1: Local Database (`v1.0.0`)** 🏠
+  * Configured and tested with a locally hosted MySQL instance.
+  * Established the base architecture: entity mapping, DTO-based separation, soft-delete functionality, and Bruno API test suites.
+
+* **Stage 2: Aiven Cloud Migration (`v1.1.0`)** ☁️
+  * Transitioned to a managed MySQL service on **Aiven Cloud**.
+  * Enabled remote database access, secured connection handling with SSL/TLS, and introduced environment variable credential management (`${DB_PASSWORD}`).
+
+* **Stage 3: Oracle Cloud Infrastructure (`v1.2.0` — *Current*)** ⚡
+  * Migrated the database layer to **Oracle Cloud Infrastructure (OCI)**.
+  * Achieved higher reliability, enterprise-grade cloud capabilities, scalable performance, and production readiness.
+
+---
+
+## 🏷️ Version Basis & History
+
+| Version | Milestone | Key Features & Infrastructure |
+| :--- | :--- | :--- |
+| **`v1.0.0`** | **Local Foundation** | Initial CRUD REST APIs, DTO layer, Hibernate soft-deletion, Local MySQL setup. |
+| **`v1.1.0`** | **Aiven Cloud Integration** | Shifted to managed cloud database via Aiven, remote credentials configuration. |
+| **`v1.2.0`** | **Oracle Cloud Migration** | Upgraded database infrastructure to Oracle Cloud (OCI) for enterprise deployment. |
+
+---
+
 ## Technologies Used
 - **Java 21**
 - **Spring Boot 3.4.1**
@@ -17,7 +57,7 @@ The application exposes a set of RESTful APIs to manage `Student` records via th
 Additionally, the project supports both **hard deletion** and **soft deletion** of records.
 
 ### API Testing (Bruno)
-The project includes a ready-to-use API testing collection for [Bruno](https://www.usebruno.com/). The endpoints configuration files are conveniently located inside the `src/Bruno Endpoints` directory. You can import this folder directly into your Bruno client to quickly test all the CRUD APIs without needing to configure the requests manually.
+The project includes a ready-to-use API testing collection for [Bruno](https://www.usebruno.com/). The endpoint configuration files are conveniently located inside the `src/Bruno Endpoints` directory. You can import this folder directly into your Bruno client to quickly test all the CRUD APIs without needing to configure the requests manually.
 
 ### API Endpoints
 
@@ -33,7 +73,7 @@ The project includes a ready-to-use API testing collection for [Bruno](https://w
 
 ## Database Specification
 
-- **Database**: MySQL (compatible with version 8.0+)
+- **Database**: MySQL (compatible with version 8.0+) / Cloud MySQL Instances
 - **Schema**: A single `students` table.
 - **Table `students` columns**:
   - `id` (BIGINT) – Primary Key, auto‑generated.
