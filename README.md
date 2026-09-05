@@ -58,15 +58,15 @@ The project includes a ready-to-use API testing collection for [Bruno](https://w
 
 ### API Endpoints
 
-| HTTP Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/student/create` | Creates a new student record using `CreateStudentRequestDTO`. Returns a `CreateStudentResponseDTO` upon success. |
-| `GET` | `/api/student/get?id={id}` | Retrieves a specific active (non-deleted) student by their ID, mapping it to a `CreateStudentResponseDTO`. |
-| `GET` | `/api/student/getAll` | Retrieves a list of all active students in the database, mapping them to `CreateStudentResponseDTO`s. |
-| `PUT` | `/api/student/update?id={id}` | Updates the information of an existing active student using `CreateStudentRequestDTO`, returning a `CreateStudentResponseDTO`. |
-| `DELETE` | `/api/student/delete?id={id}` | Permanently deletes a student record from the database (Hard Delete). |
-| `DELETE` | `/api/student/deleteAll` | Permanently deletes all student records from the database. |
-| `PATCH` | `/api/student/soft-delete?id={id}` | Marks a student record as deleted by setting a `deleted` flag to true (Soft Delete), hiding it from standard fetch queries. |
+| HTTP Method | Endpoint                        | Description |
+|---|---------------------------------|---|
+| `POST` | `/api/student`                  | Creates a new student record using `CreateStudentRequestDTO`. Returns a `CreateStudentResponseDTO` upon success. |
+| `GET` | `/api/student/{id}`             | Retrieves a specific active (non-deleted) student by their ID, mapping it to a `CreateStudentResponseDTO`. |
+| `GET` | `/api/student`                  | Retrieves a list of all active students in the database, mapping them to `CreateStudentResponseDTO`s. |
+| `PUT` | `/api/student/{id}`             | Updates the information of an existing active student using `CreateStudentRequestDTO`, returning a `CreateStudentResponseDTO`. |
+| `DELETE` | `/api/student/{id}`             | Permanently deletes a student record from the database (Hard Delete). |
+| `DELETE` | `/api/student`         | Permanently deletes all student records from the database. |
+| `PATCH` | `/api/student/{id}` | Marks a student record as deleted by setting a `deleted` flag to true (Soft Delete), hiding it from standard fetch queries. |
 
 ## Database Specification
 
