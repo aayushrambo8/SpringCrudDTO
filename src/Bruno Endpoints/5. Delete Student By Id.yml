@@ -5,11 +5,7 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8080/api/student/delete?id=
-  params:
-    - name: id
-      value: ""
-      type: query
+  url: http://localhost:8080/api/student/4
 
 settings:
   encodeUrl: true

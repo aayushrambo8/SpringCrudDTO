@@ -5,11 +5,7 @@ info:
 
 http:
   method: PATCH
-  url: http://localhost:8080/api/student/soft-delete?id=4
-  params:
-    - name: id
-      value: "4"
-      type: query
+  url: http://localhost:8080/api/student/
 
 settings:
   encodeUrl: true
