@@ -8,12 +8,9 @@ A Spring Boot application demonstrating CRUD (Create, Read, Update, Delete) oper
 
 An overview of the evolutionary roadmap and infrastructure progression of the project:
 
-```
-┌─────────────────────────┐       ┌─────────────────────────┐       ┌─────────────────────────┐
-│     Stage 1: v1.0.0     │       │     Stage 2: v1.1.0     │       │     Stage 3: v1.2.0     │
-│   🏠 Local MySQL DB     │ ───►  │  ☁️ Aiven Cloud MySQL   │ ───►  │  ⚡ Oracle Cloud (OCI)  │
-│  (Initial Development)  │       │   (Managed Cloud DB)    │       │  (Enterprise Deployment)│
-└─────────────────────────┘       └─────────────────────────┘       └─────────────────────────┘
+```mermaid
+flowchart LR
+    A["<b>Stage 1: v1.0.0</b><br/>🏠 Local MySQL DB<br/><i>(Initial Development)</i>"] --> B["<b>Stage 2: v1.1.0</b><br/>☁️ Aiven Cloud MySQL<br/><i>(Managed Cloud DB)</i>"] --> C["<b>Stage 3: v1.2.0</b><br/>⚡ Oracle Cloud (OCI)<br/><i>(Enterprise Deployment)</i>"]
 ```
 
 ### 📍 Progression Details
